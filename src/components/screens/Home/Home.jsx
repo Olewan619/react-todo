@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import TodoItem from "./item/Todoitem";
+import CreateTodo from "./item/CreateTodo";
 
 const data = [
     {
@@ -29,12 +30,19 @@ const Home = () => {
         setTodos(copy)
     }
 
+    const removeTodo = (id) => {
+        setTodos([...todos].filter(t => t.id != id))
+    }
+
+    
+
     return (
         <div className="Main">
             <h1 className="title-todo">TodoList</h1>
             {todos.map(todo => (
-                <TodoItem key={todo.id}  todo={todo}  changeTodo={changeTodo} />
+                <TodoItem key={todo.id}  todo={todo}  changeTodo={changeTodo} removeTodo={removeTodo} />
             ))}
+            <CreateTodo setTodos={setTodos}> </CreateTodo>
         </div>
     )
 }
